@@ -21,6 +21,7 @@ Vue.filter('date', (val) => {
   dd = dd > 9 ? dd : '0' + dd;
   return yy + '-' + mm + '-' + dd;
 })
+
 Vue.filter('datetime', (val) => {
   //把bigint转换为yyyy-mm-dd hh:mm:ss
   var date = new Date(val);
@@ -39,13 +40,21 @@ Vue.filter('datetime', (val) => {
 
   return yy + '-' + mm + '-' + dd + ' ' + hh + ':' + mi + ':' + ss;
 })
+
 Vue.filter('currency', (val) => {
   //把int转换为￥xx.yy
   return '￥'+val.toFixed(2)
 })
 
+Vue.filter('tableStatus',(val)=>{
+  if(val==1) return '空闲';
+  else if(val==1)   return '预定';
+  else if(val==2)   return '占用';
+  else return '其他';
+})  
+
 new Vue({
-  router,
-  store,
-  render: h => h(App)
+  router, 
+  store,                //指定当前项目距唯一的Vuex存储仓库对象
+  render: h => h(App)   //根据App组件创建<App></App>元素，挂载到#app内部
 }).$mount('#app')
